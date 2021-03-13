@@ -8,13 +8,13 @@ const resolvers = {
         users: async () => {
             return User.find()
             .select('-__v -password')
-            .populate('savedBooks');
+            .populate('Book');
         },
         // get a single user
         user: async (parent, { username }) => {
             return User.findOne({ username })
             .select('-__v -password')
-            .populate('savedBooks');
+            .populate('Book');
         }
     },
 
@@ -43,12 +43,12 @@ const resolvers = {
             return { token, user };
             },
 
-            saveBook: async (parent, { SaveBookInput }, context) => {
+            saveBook: async (parent, { input }, context) => {
                 if (context.user) {
 
-                    const updatedUser = await User.findOneAndUpdate(
+                    const updatedUser = await User.findByIdAndUpdate(
                         { _id: context.user._id },
-                        { $push: { savedBooks: SaveBookInput } },
+                        { $push: { savedBooks: input } },
                         { new: true, runValidators: true }
                     )
                     ;
