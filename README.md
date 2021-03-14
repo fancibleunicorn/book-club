@@ -4,7 +4,7 @@
 
  This a MERN stack project that allows you to search for books using Google's book API.  Once you create an account, you can save books to your list and then delete them when youa re finished.
 
- ![Project Image](./src/images/screenshot.png)
+ ![Project Image](./client/src/images/screenshot.png)
   
 To view the live page:  [Click Here](https://peaceful-fjord-06561.herokuapp.com/)
 
