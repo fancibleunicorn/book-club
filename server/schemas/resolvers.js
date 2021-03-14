@@ -15,6 +15,17 @@ const resolvers = {
             return User.findOne({ username })
             .select('-__v -password')
             .populate('Book');
+        },
+        me: async (parent, args, context) => {
+            if (context.user) {
+            const userData = await User.findOne({ _id: context.user._id })
+            .select('-__v -password')
+            .populate('Book');
+        
+            return userData;
+            }
+        
+            throw new AuthenticationError('Not logged in');
         }
     },
 
